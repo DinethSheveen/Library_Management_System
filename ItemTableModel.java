@@ -45,12 +45,12 @@ public class ItemTableModel extends AbstractTableModel{
       } 
       else if(columnIndex == 3){
           if(itemList.get(rowIndex) instanceof Book){
-              temp =  "Book";
+              temp = "Book";
           }
-          else if(itemList.get(rowIndex)instanceof DVD){
+          else if(itemList.get(rowIndex) instanceof DVD){
               temp = "DVD";
           }
-          else if(itemList.get(rowIndex)instanceof Magazine){
+          else if(itemList.get(rowIndex) instanceof Magazine){
               temp = "Magazine";
           }
       }
