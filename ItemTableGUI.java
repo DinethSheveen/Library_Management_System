@@ -54,39 +54,36 @@ public class ItemTableGUI extends JFrame {
         add(scrollPane,BorderLayout.CENTER); 
         add(button, BorderLayout.SOUTH);
         
-        //Listening
-        EventHandler listener = new EventHandler();
-        button.addActionListener(listener);
+        EventHandler handler = new EventHandler();
+        button.addActionListener(handler);
         
     }
-  
-     public class EventHandler implements ActionListener{   
+    
+    public class EventHandler implements ActionListener{
 
-         String myString;
-         
         @Override
         public void actionPerformed(ActionEvent e) {
             int bookCount=0;
-            int dvdCount=0;
-            int magazineCount=0;
+            int DVDCount = 0;
+            int magazineCount =0 ;
+            
             for(int i=0;i<itemList.size();i++){
-                if(itemList.get(i)instanceof Book){
+                if(itemList.get(i) instanceof Book){
                     bookCount++;
                 }
-                else if(itemList.get(i)instanceof DVD){
-                    dvdCount++;
+                else if(itemList.get(i) instanceof DVD){
+                    DVDCount++;
                 }
-                else if(itemList.get(i)instanceof Magazine){
+                else if(itemList.get(i) instanceof Magazine){
                     magazineCount++;
                 }
             }
             
-            myString = "Number of Books = "+bookCount+" Number of DVD's = "+dvdCount+" Number of magazines = "+magazineCount;
-            
+            String myString = "Books = "+bookCount+" DVD = "+DVDCount+" Magazine = "+magazineCount;
             JOptionPane.showMessageDialog(null,myString);
         }
+    }
+  
         
-        
-    }   
     
 }
