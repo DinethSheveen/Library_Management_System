@@ -47,10 +47,9 @@ public abstract class Item implements Comparable<Item>{
     public String toString(){
         return "Title: " + title + ", ISBN = " + ISBN + ", publication year: " + publicationYear; 
     }
-    
-    @Override
+
     public int compareTo(Item o){
-        return this.publicationYear - o.publicationYear;
+        return this.publicationYear-o.publicationYear;
     }
     
 }
