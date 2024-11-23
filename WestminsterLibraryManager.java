@@ -10,7 +10,6 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-import java.util.Scanner;
 
 
 public class WestminsterLibraryManager implements LibraryManager {
@@ -39,8 +38,7 @@ public class WestminsterLibraryManager implements LibraryManager {
         
         System.out.println("To Open GUI, press 3");
         
-        System.out.println("To edit the title of the item press 4");
-        
+        System.out.println("To edit the title of the item, press 4");
 
         
         // Switch based on selected option
@@ -69,7 +67,11 @@ public class WestminsterLibraryManager implements LibraryManager {
             case 3:
                 this.runGUI();
                 break;
-           
+                
+            //Edit ttle
+            case 4:
+                this.editTitleItem();
+                break;
         }
         
         return exit;
@@ -91,7 +93,7 @@ public class WestminsterLibraryManager implements LibraryManager {
             System.out.println("Enter the Title");
             String title = s.nextLine();
             
-            System.out.println("Enetr the ISBN");
+            System.out.println("Enter the ISBN");
             String isbn = s.nextLine();
             
             System.out.println("Enter the publication year ");
@@ -130,6 +132,25 @@ public class WestminsterLibraryManager implements LibraryManager {
                     
                     this.addItemToList(dvd);
                     break;
+                    
+                case 3:
+                    //it is a magazine
+                    System.out.println("Enter the issue number : ");
+                    String issueNumber = s.nextLine();
+                    
+                    System.out.println("Enter the Publication Frequency : ");
+                    int publicationFrequency = s.nextInt();
+                    
+                    System.out.println("Ente the name of the editor : ");
+                    String editor = s.nextLine();
+                    
+                    Magazine magazine = new Magazine(title,isbn);
+                    magazine.setIssueNumber(issueNumber);
+                    magazine.setPulicationFrequency(publicationFrequency);
+                    magazine.setEditor(editor);
+                    
+                    this.addItemToList(magazine);
+                    break;
             }
             
         }
@@ -151,10 +172,6 @@ public class WestminsterLibraryManager implements LibraryManager {
 
     @Override
     public void displayItems() {
-        
-        Collections.sort(itemList);
-        System.out.println(itemList);
-        
         if (!itemList.isEmpty()){
             for(Item item : itemList) {
                 // print the type of item and the the description
@@ -163,13 +180,19 @@ public class WestminsterLibraryManager implements LibraryManager {
                 else if (item instanceof DVD)
                     System.out.print("DVD - ");
                 //add here teh code if you added teh class Megazine
-                
+                else if(item instanceof Magazine){
+                    System.out.println("Magazine - ");
+                }
                 System.out.println(item.toString());
             }
         }
         else{
             System.out.println("There are no items in the system.");
         }
+        
+        //Sorting according to the year
+        Collections.sort(itemList);
+        System.out.println("Item sorted according to the publication year : "+itemList);
     }
 
     @Override
@@ -181,26 +204,33 @@ public class WestminsterLibraryManager implements LibraryManager {
     @Override
     public void editTitleItem(){
         Scanner input = new Scanner(System.in);
-        System.out.print("Enter the ISBN : ");
+        System.out.print("Enter the ISBN here : ");
         String ISBN = input.next();
         
         for(int i=0;i<itemList.size();i++){
             if(ISBN.equals(itemList.get(i))){
-                System.out.println("Title : "+itemList.get(i).getTitle());
-                System.out.println("Publication Year : "+itemList.get(i).getPublicationYear());
+                System.out.println("Title = "+itemList.get(i).getTitle());
+                System.out.println("Publication Year = "+itemList.get(i).getPublicationYear());
+                
                 if(itemList.get(i) instanceof Book){
-                    System.out.println("Type : Book");
+                    System.out.println("Type = Book");
                 }
                 else if(itemList.get(i) instanceof DVD){
-                    System.out.println("Type : DVD");
+                    System.out.println("Type = DVD");
+                }
+                else if(itemList.get(i) instanceof Magazine){
+                    System.out.println("Type = Magazine");
                 }
                 
-                //Changing the title
-                System.out.print("\nEnter a new title to the book : ");
+                //Setting the new title.
+                System.out.print("Enter the new title : ");
                 String newTitle = input.next();
-                itemList.get(i).setTitle(newTitle);
+                itemList.get(i).setTitle(newTitle);     //Saving the new title
+                
+            }
+            else{
+                System.out.println("ISBN not found");
             }
         }
     }
-    
 }
