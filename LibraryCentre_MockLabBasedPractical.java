@@ -4,17 +4,6 @@
 
 package librarycentre_package;
 
-/**** ENTER HERE YOUR DETAILS:*******
-         * 
-         * FIRST NAME:
-         * Pathirahannahelage
-         * LAST NAME:
-         * Fernando
-         * STUDENT ID:
-         * 
-         */
-
-
 public class LibraryCentre_MockLabBasedPractical {
 
     public static void main(String[] args) {
