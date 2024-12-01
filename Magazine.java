@@ -9,42 +9,45 @@ package librarycentre_package;
  * @author User
  */
 public class Magazine extends Item{
-    private String issueNumber;
-    private int publicationFrequency;
-    private String editor;
     
+    //Instance variables
+    private String editor;
+    private int publicationFreq;
+    private int issueNumber;
+    
+    //Constructor
     public Magazine(String title,String ISBN){
         super(title,ISBN);
     }
     
-    //Setter and getters
-    public String getIssueNumber(){
-        return this.issueNumber;
-    }
-    
-     public String getEditor(){
+    //Getters and setrers
+    public String getEditor(){
         return this.editor;
     }
     
-    public int getPublicationFrequency(){
-        return this.publicationFrequency;
+    public int getPublicationFreq(){
+        return this.publicationFreq;
     }
-   
-    public void setIssueNumber(String issueNumber){
-        this.issueNumber=issueNumber;
+    
+    public int getIssueNumber(){
+        return this.issueNumber;
     }
     
     public void setEditor(String editor){
-        this.editor=editor;
+        this.editor = editor;
     }
     
-    public void setPulicationFrequency(int publicationFrequency){
-        this.publicationFrequency = publicationFrequency;
+    public void setIssueNumber(int issueNumber){
+        this.issueNumber = issueNumber;
+    }
+    
+    public void setPublicationFreq(int publicationFreq){
+        this.publicationFreq = publicationFreq;
     }
     
     @Override
     public String toString(){
-        return super.toString()+", Issue Number = "+this.getIssueNumber()+", Editor = "+this.getEditor()+", Publicatioon Frequency = "+this.getPublicationFrequency();
+        return super.toString()+", Editor : "+this.editor+", Issue Number : "+this.issueNumber+", Publication Frequency : "+this.publicationFreq;
     }
     
 }
