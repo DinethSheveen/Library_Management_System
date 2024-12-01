@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class WestminsterLibraryManager implements LibraryManager {
     
     // ArrayLists
-    private ArrayList<Item> itemList;
+    public ArrayList<Item> itemList;
     private int item_limit;
     
     public WestminsterLibraryManager(int maxItemNumber){
@@ -38,7 +38,7 @@ public class WestminsterLibraryManager implements LibraryManager {
         
         System.out.println("To Open GUI, press 3");
         
-        System.out.println("To edit the title of the item, press 4");
+        System.out.println("To edit the title of the source. press 4");
 
         
         // Switch based on selected option
@@ -67,8 +67,8 @@ public class WestminsterLibraryManager implements LibraryManager {
             case 3:
                 this.runGUI();
                 break;
-                
-            //Edit ttle
+           
+            //edit title
             case 4:
                 this.editTitleItem();
                 break;
@@ -93,7 +93,7 @@ public class WestminsterLibraryManager implements LibraryManager {
             System.out.println("Enter the Title");
             String title = s.nextLine();
             
-            System.out.println("Enter the ISBN");
+            System.out.println("Enetr the ISBN");
             String isbn = s.nextLine();
             
             System.out.println("Enter the publication year ");
@@ -134,20 +134,22 @@ public class WestminsterLibraryManager implements LibraryManager {
                     break;
                     
                 case 3:
-                    //it is a magazine
-                    System.out.println("Enter the issue number : ");
-                    String issueNumber = s.nextLine();
-                    
-                    System.out.println("Enter the Publication Frequency : ");
-                    int publicationFrequency = s.nextInt();
-                    
-                    System.out.println("Ente the name of the editor : ");
+                    //it is a dvd
+                    System.out.println("Enter the name of the editor");
                     String editor = s.nextLine();
+
+                    System.out.println("Enter the publication frequency");
+                    int publicationFreq = s.nextInt();
                     
-                    Magazine magazine = new Magazine(title,isbn);
-                    magazine.setIssueNumber(issueNumber);
-                    magazine.setPulicationFrequency(publicationFrequency);
+                    System.out.println("Enter the issue Number");
+                    int issueNumber = s.nextInt();
+                    
+                    // create a new receptionist and add to the list
+                    Magazine magazine = new Magazine(title, isbn);
                     magazine.setEditor(editor);
+                    magazine.setIssueNumber(issueNumber);
+                    magazine.setPublicationFreq(publicationFreq);
+                    magazine.setPublicationYear(year);
                     
                     this.addItemToList(magazine);
                     break;
@@ -166,12 +168,14 @@ public class WestminsterLibraryManager implements LibraryManager {
             itemList.add(item);
         }
         else{
-            System.out.println("No more space in teh list");
+            System.out.println("No more space in the list");
         }
     }
 
     @Override
     public void displayItems() {
+        
+        
         if (!itemList.isEmpty()){
             for(Item item : itemList) {
                 // print the type of item and the the description
@@ -181,7 +185,7 @@ public class WestminsterLibraryManager implements LibraryManager {
                     System.out.print("DVD - ");
                 //add here teh code if you added teh class Megazine
                 else if(item instanceof Magazine){
-                    System.out.println("Magazine - ");
+                    System.out.print("Magazine - ");
                 }
                 System.out.println(item.toString());
             }
@@ -190,9 +194,9 @@ public class WestminsterLibraryManager implements LibraryManager {
             System.out.println("There are no items in the system.");
         }
         
-        //Sorting according to the year
         Collections.sort(itemList);
-        System.out.println("Item sorted according to the publication year : "+itemList);
+        System.out.println(itemList);
+        
     }
 
     @Override
@@ -204,33 +208,30 @@ public class WestminsterLibraryManager implements LibraryManager {
     @Override
     public void editTitleItem(){
         Scanner input = new Scanner(System.in);
-        System.out.print("Enter the ISBN here : ");
+        System.out.println("Enter the ISBN number of the source");
         String ISBN = input.next();
         
         for(int i=0;i<itemList.size();i++){
-            if(ISBN.equals(itemList.get(i))){
-                System.out.println("Title = "+itemList.get(i).getTitle());
-                System.out.println("Publication Year = "+itemList.get(i).getPublicationYear());
+            if(ISBN.equals(itemList.get(i).getISBN())){
+                System.out.println("Title : "+itemList.get(i).getTitle());
+                System.out.println("Publication Year : "+itemList.get(i).getPublicationYear());
                 
                 if(itemList.get(i) instanceof Book){
-                    System.out.println("Type = Book");
+                    System.out.println("Type : Book");
                 }
                 else if(itemList.get(i) instanceof DVD){
-                    System.out.println("Type = DVD");
+                    System.out.println("Type : DVD");
                 }
                 else if(itemList.get(i) instanceof Magazine){
-                    System.out.println("Type = Magazine");
+                    System.out.println("Type : Magazine");
                 }
                 
-                //Setting the new title.
-                System.out.print("Enter the new title : ");
+                System.out.println("Enter the new title of the source");
                 String newTitle = input.next();
-                itemList.get(i).setTitle(newTitle);     //Saving the new title
+                itemList.get(i).setTitle(newTitle);
                 
-            }
-            else{
-                System.out.println("ISBN not found");
             }
         }
     }
+    
 }
